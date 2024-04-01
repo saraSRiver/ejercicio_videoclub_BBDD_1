@@ -248,3 +248,11 @@ SELECT d.DIRECTOR_NAME, d.DIRECTOR_DEAD_DATE, m.MOVIE_NAME, m.MOVIE_LAUNCH_DATE,
 FROM DIRECTORS d
 INNER JOIN MOVIES m ON m.DIRECTOR_ID = d.DIRECTOR_ID 
 WHERE d.DIRECTOR_DEAD_DATE IS NOT null
+
+
+--Utilizando la información de la sentencia anterior, modifica la fecha de defunción a un año más tarde del estreno de la película (mediante sentencia SQL)
+UPDATE DIRECTORS d SET d.DIRECTOR_DEAD_DATE = '2002-05-04'
+WHERE d.DIRECTOR_NAME = 'Dalila Cubley'
+
+UPDATE DIRECTORS d SET d.DIRECTOR_DEAD_DATE = '2010-05-04'
+WHERE d.DIRECTOR_NAME = 'Nefen Bending'
