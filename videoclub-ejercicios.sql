@@ -238,3 +238,13 @@ INNER JOIN MOVIES m ON m.MOVIE_ID = mr.MOVIE_ID
 INNER JOIN DIRECTORS d ON m.DIRECTOR_ID = d.DIRECTOR_ID 
 GROUP BY m.MOVIE_NAME, d.DIRECTOR_NAME 
 ORDER BY COUNT(mr.MEMBER_MOVIE_RENTAL_ID) DESC
+
+--Comprueba si hay errores en la BD entre las películas y directores (un director fallecido en el 76 no puede dirigir una película en el 88)
+SELECT d.DIRECTOR_NAME, d.DIRECTOR_DEAD_DATE, m.MOVIE_NAME, m.MOVIE_LAUNCH_DATE,
+	CASE
+		WHEN m.MOVIE_LAUNCH_DATE >= d.DIRECTOR_DEAD_DATE 
+		THEN 'Datos incorrectos' 
+	END AS "comparacion fechas"
+FROM DIRECTORS d
+INNER JOIN MOVIES m ON m.DIRECTOR_ID = d.DIRECTOR_ID 
+WHERE d.DIRECTOR_DEAD_DATE IS NOT null
