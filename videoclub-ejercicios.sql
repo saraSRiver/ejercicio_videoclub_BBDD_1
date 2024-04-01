@@ -182,3 +182,10 @@ SELECT COUNT(a.AWARD_WIN), s.STUDIO_NAME  FROM AWARDS a
 INNER JOIN MOVIES m ON a.MOVIE_ID = m.MOVIE_ID 
 INNER JOIN STUDIOS s ON s.STUDIO_ID = m.STUDIO_ID
 GROUP BY s.STUDIO_NAME 
+
+--Indica el número de premios a los que estuvo nominado un actor, pero que no ha conseguido (Si una película está nominada a un premio, su actor también lo está)
+SELECT  COUNT(a.AWARD_ALMOST_WIN) n_nominaciones, ac.ACTOR_NAME  FROM AWARDS a
+INNER JOIN MOVIES m ON a.MOVIE_ID = m.MOVIE_ID 
+INNER JOIN MOVIES_ACTORS ma ON ma.MOVIE_ID = m.MOVIE_ID 
+INNER JOIN ACTORS ac ON ac.ACTOR_ID  = ma.ACTOR_ID 
+GROUP BY ac.ACTOR_NAME 
