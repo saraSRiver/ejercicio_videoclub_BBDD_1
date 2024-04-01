@@ -147,3 +147,16 @@ WHERE s.STUDIO_ACTIVE = 0;
 SELECT m.MOVIE_NAME, mr.MEMBER_RENTAL_DATE FROM MOVIES m 
 INNER JOIN MEMBERS_MOVIE_RENTAL mr ON m.MOVIE_ID = mr.MOVIE_ID
 ORDER BY mr.MEMBER_RENTAL_DATE DESC LIMIT 10;
+
+--Indica cuál es la media de duración de las películas de cada director
+SELECT d.DIRECTOR_NAME,AVG(m.MOVIE_DURATION) AS duracion_peliculas
+FROM DIRECTORS d INNER JOIN MOVIES m
+ON d.DIRECTOR_ID = m.DIRECTOR_ID
+group BY d.DIRECTOR_NAME
+
+--Indica cuál es el nombre y la duración mínima de la película que ha sido alquilada en los últimos 2 años por los miembros del videoclub 
+--(La "fecha de ejecución" en este script es el 25-01-2019)
+SELECT m.MOVIE_NAME, MIN(m.MOVIE_DURATION) FROM MOVIES m 
+INNER JOIN MEMBERS_MOVIE_RENTAL mr ON m.MOVIE_ID = mr.MOVIE_ID
+WHERE mr.MEMBER_RENTAL_DATE BETWEEN '2017-01-01' AND '2019-01-25'
+GROUP BY m.MOVIE_NAME
