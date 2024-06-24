@@ -256,3 +256,15 @@ WHERE d.DIRECTOR_NAME = 'Dalila Cubley'
 
 UPDATE DIRECTORS d SET d.DIRECTOR_DEAD_DATE = '2010-05-04'
 WHERE d.DIRECTOR_NAME = 'Nefen Bending'
+
+	
+-----------------------------------DIFICULTAD: Berserk mode (enunciados simples, mucha diversión...)---------------------------
+
+--Indica cuál es el género favorito de cada uno de los directores cuando dirigen una película
+SELECT  d.DIRECTOR_NAME, g.GENRE_NAME, count(g.GENRE_NAME) AS fav_genres FROM DIRECTORS d
+INNER JOIN MOVIES m ON m.DIRECTOR_ID = d.DIRECTOR_ID
+INNER JOIN GENRES g ON g.GENRE_ID = m.GENRE_ID
+GROUP BY d.DIRECTOR_NAME, g.GENRE_NAME 
+HAVING COUNT(g.GENRE_NAME) > 1 
+
+
